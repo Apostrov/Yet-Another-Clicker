@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8362263106196735232}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: -1, z: 9.616424}
+  m_LocalPosition: {x: 4, y: -0.49, z: 9.616424}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -97,6 +97,7 @@ MonoBehaviour:
   secBetweenAttack: 0.8
   secToDodge: 0.7
   cost: 5
+  maxHp: 0
   _hp: 10
   _damage: 1
 --- !u!95 &2708989597832457641
