@@ -5674,7 +5674,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: cfab193097d4cdd44901db5b4d4a1a45, type: 3}
-  m_Color: {r: 1, g: 0.9103774, b: 0.9103774, a: 1}
+  m_Color: {r: 0.8396226, g: 0.29703632, b: 0.29703632, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5999,7 +5999,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 4.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -6721,7 +6721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5c9024cab2b14544bc370a0b5592a90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  indexBeforeNextWave: 020000000300000005000000
+  indexBeforeNextWave: 02000000030000000500000008000000
   Hero: {fileID: 340419292}
   EnemyStack:
   - {fileID: 6849963962566032162, guid: 74be68a6a873a024194c17eadc2e9ad5, type: 3}
@@ -6729,6 +6729,12 @@ MonoBehaviour:
   - {fileID: 2314595088591174976, guid: c5e7fb27ee3b89845a0bf587e1146a0b, type: 3}
   - {fileID: 8362263106196735232, guid: 57ffd48cdae713d4986d93564781fd77, type: 3}
   - {fileID: 8145110981371609439, guid: 142deabbeb300e94ab279bca3ac9a9e7, type: 3}
+  - {fileID: 8362263106196735232, guid: 57ffd48cdae713d4986d93564781fd77, type: 3}
+  - {fileID: 8145110981371609439, guid: 142deabbeb300e94ab279bca3ac9a9e7, type: 3}
+  - {fileID: 6849963962566032162, guid: 74be68a6a873a024194c17eadc2e9ad5, type: 3}
+  - {fileID: 2314595088591174976, guid: c5e7fb27ee3b89845a0bf587e1146a0b, type: 3}
+  - {fileID: 2314595088591174976, guid: c5e7fb27ee3b89845a0bf587e1146a0b, type: 3}
+  - {fileID: 2314595088591174976, guid: c5e7fb27ee3b89845a0bf587e1146a0b, type: 3}
   CurrentEnemy: {fileID: 0}
   HeroAnim: {fileID: 340419296}
   clickKey: 119
@@ -6910,7 +6916,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: cfab193097d4cdd44901db5b4d4a1a45, type: 3}
-  m_Color: {r: 0.8113208, g: 0.746262, b: 0.746262, a: 0.34117648}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.54509807}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

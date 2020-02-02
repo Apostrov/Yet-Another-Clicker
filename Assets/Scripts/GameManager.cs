@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
     private bool _gameOver = false;
     private bool _dodged = false;
     private bool _canDodge = false;
+    private Vector3 _idlePos;
+    private Vector3 _dodgePos;
 
 
     private float _time;
@@ -44,6 +46,8 @@ public class GameManager : MonoBehaviour
         CurrentEnemy = Instantiate(EnemyStack[enemyIndex]);
         _enemyScript = CurrentEnemy.GetComponent<Enemy>();
         _time = _enemyScript.secBetweenAttack;
+        _idlePos = Hero.transform.position;
+        _dodgePos = new Vector3(_idlePos.x - 2, _idlePos.y, _idlePos.z);
 
         Money.text = $"Money: {_heroScript.Money()}$";
         HeroLife.text = $"Life: {_heroScript.HP()}/{_heroScript.maxHP}";
@@ -87,8 +91,7 @@ public class GameManager : MonoBehaviour
         if (_canDodge && (Input.GetMouseButtonDown(1) || Input.GetKeyDown(dodgeKey)))
         {
             _dodged = true;
-            var position = Hero.transform.position;
-            Hero.transform.position = new Vector3(position.x,  position.y - 2, position.z);
+            Hero.transform.position = _dodgePos;
             _canDodge = false;
         }
 
@@ -117,6 +120,12 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            if (_waveIndex >= indexBeforeNextWave.Length)
+            {
+                _gameOver = true;
+                Win.gameObject.SetActive(true);
+                return;
+            }
             if (enemyIndex >= indexBeforeNextWave[_waveIndex])
             {
                 shop.SetActive(true);
@@ -134,8 +143,7 @@ public class GameManager : MonoBehaviour
         if (_dodged)
         {
             _dodged = false;
-            var position = Hero.transform.position;
-            Hero.transform.position = new Vector3(position.x,  position.y + 2, position.z);
+            Hero.transform.position = _idlePos;
         }
         else
         {
