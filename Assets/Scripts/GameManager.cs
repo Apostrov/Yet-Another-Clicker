@@ -4,11 +4,13 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public int[] indexBeforeNextWave = {2, 3};
+    public int[] indexBeforeNextWave = {2, 3, 5};
 
     public GameObject Hero;
     public GameObject[] EnemyStack;
     public GameObject CurrentEnemy;
+
+    public Animator HeroAnim;
 
     public KeyCode clickKey = KeyCode.W;
     public KeyCode dodgeKey = KeyCode.S;
@@ -17,8 +19,13 @@ public class GameManager : MonoBehaviour
     public Text HeroLife;
     public Text EnemyLife;
     public Text DodgeAlert;
+    
+    public Text Win;
+    public Text Lose;
 
     public GameObject shop;
+
+    public Slider hpBar;
 
     private int enemyIndex = 0;
     private int _waveIndex = 0;
@@ -55,34 +62,43 @@ public class GameManager : MonoBehaviour
 
             if (_heroScript.HP() <= 0.01f)
             {
-                Debug.Log("Lose");
                 _gameOver = true;
+                Lose.gameObject.SetActive(true);
             }
 
             Attacks();
+            hpBar.value = _enemyScript.HP() / _enemyScript.maxHp;
         }
     }
 
     private void Attacks()
     {
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(clickKey))
+        if (!_dodged && (Input.GetMouseButtonDown(0) || Input.GetKeyDown(clickKey)))
         {
+            HeroAnim.SetBool("isAttack", true);
             float life = _enemyScript.TakeHeat(_heroScript.Attack());
             EnemyLife.text = $"Bo$$ life: {life}";
+        }
+        else
+        {
+            HeroAnim.SetBool("isAttack", false);
         }
 
         if (_canDodge && (Input.GetMouseButtonDown(1) || Input.GetKeyDown(dodgeKey)))
         {
             _dodged = true;
+            var position = Hero.transform.position;
+            Hero.transform.position = new Vector3(position.x,  position.y - 2, position.z);
             _canDodge = false;
         }
 
         _time -= Time.deltaTime;
+        CurrentEnemy.GetComponent<Animator>().SetFloat("time", _time);
         if (_time < 0)
         {
             StartCoroutine(WaitBeforeAttack(_enemyScript.secToDodge, _enemyScript.Attack()));
             _canDodge = true;
-            DodgeAlert.gameObject.SetActive(true);
+            // DodgeAlert.gameObject.SetActive(true);
             _time = _enemyScript.secBetweenAttack;
         }
     }
@@ -97,6 +113,7 @@ public class GameManager : MonoBehaviour
         if (enemyIndex >= EnemyStack.Length)
         {
             _gameOver = true;
+            Win.gameObject.SetActive(true);
         }
         else
         {
@@ -113,10 +130,12 @@ public class GameManager : MonoBehaviour
     private IEnumerator WaitBeforeAttack(float waitTime, float damage)
     {
         yield return new WaitForSeconds(waitTime);
-        DodgeAlert.gameObject.SetActive(false);
+        // DodgeAlert.gameObject.SetActive(false);
         if (_dodged)
         {
             _dodged = false;
+            var position = Hero.transform.position;
+            Hero.transform.position = new Vector3(position.x,  position.y + 2, position.z);
         }
         else
         {
